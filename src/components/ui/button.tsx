@@ -22,20 +22,10 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: keyof typeof buttonVariants.variant;
   size?: keyof typeof buttonVariants.size;
-  asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant = 'default',
-      size = 'default',
-      asChild = false,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, variant = 'default', size = 'default', ...props }, ref) => {
     const baseClasses =
       'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
 
@@ -53,4 +43,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-export { Button, buttonVariants };
+export { Button };
