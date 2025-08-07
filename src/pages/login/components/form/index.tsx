@@ -1,34 +1,32 @@
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useAuthStore } from '../../../shared/store/useAuthStore'
-import { loginSchema, type LoginFormData } from '../../../../use-cases/auth'
-import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi'
-import { useState } from 'react'
-import { Button } from '../../../../components/ui/button'
-import { Alert, AlertDescription } from '../../../../components/ui/alert'
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuthStore } from '../../../shared/store/useAuthStore';
+import { loginSchema, type LoginFormData } from '../../../../use-cases/auth';
+import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { useState } from 'react';
+import { Button } from '../../../../components/ui/button';
+import { Alert, AlertDescription } from '../../../../components/ui/alert';
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false)
-  const { isLoading, error, login, clearError } = useAuthStore()
-  
+  const [showPassword, setShowPassword] = useState(false);
+  const { isLoading, error, login, clearError } = useAuthStore();
+
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema)
-  })
+    resolver: zodResolver(loginSchema),
+  });
 
   const onSubmit = async (data: LoginFormData) => {
-    await login(data.email, data.password)
-  }
+    await login(data.email, data.password);
+  };
 
   return (
     <div className="w-full max-w-md space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900">
-          Faça seu login
-        </h2>
+        <h2 className="text-3xl font-bold text-gray-900">Faça seu login</h2>
         <p className="mt-2 text-sm text-gray-600">
           Entre com suas credenciais para acessar o sistema
         </p>
@@ -53,7 +51,10 @@ export default function LoginForm() {
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <div className="mt-1 relative">
@@ -69,12 +70,17 @@ export default function LoginForm() {
               />
             </div>
             {errors.email && (
-              <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+              <p className="mt-1 text-sm text-red-600">
+                {errors.email.message}
+              </p>
             )}
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Senha
             </label>
             <div className="mt-1 relative">
@@ -101,16 +107,14 @@ export default function LoginForm() {
               </button>
             </div>
             {errors.password && (
-              <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+              <p className="mt-1 text-sm text-red-600">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
           <div>
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full"
-            >
+            <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? (
                 <div className="flex items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
@@ -124,5 +128,5 @@ export default function LoginForm() {
         </form>
       </div>
     </div>
-  )
+  );
 }

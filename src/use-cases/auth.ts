@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 export const loginSchema = z.object({
   email: z
@@ -8,7 +8,7 @@ export const loginSchema = z.object({
   password: z
     .string()
     .min(1, 'Senha é obrigatória')
-    .min(4, 'Senha deve ter pelo menos 4 caracteres')
-})
+    .min(4, 'Senha deve ter pelo menos 4 caracteres'),
+});
 
-export type LoginFormData = z.infer<typeof loginSchema>
+export type LoginFormData = z.infer<typeof loginSchema>;

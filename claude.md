@@ -3,7 +3,7 @@
 - Use english for the code.
 - Use portuguese for labels, inputs, buttons, etc.
 
-## Components lib 
+## Components lib
 
 - Use these libs to create components: originui and shadcn
 

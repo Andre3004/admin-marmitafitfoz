@@ -1,7 +1,7 @@
-import { lazy, Suspense } from 'react'
-import Loading from '../shared/components/Loading'
+import { lazy, Suspense } from 'react';
+import Loading from '../shared/components/Loading';
 
-const LoginComponent = lazy(() => import('./components/form'))
+const LoginComponent = lazy(() => import('./components/form'));
 
 export default function LoginPage() {
   return (
@@ -10,5 +10,5 @@ export default function LoginPage() {
         <LoginComponent />
       </Suspense>
     </div>
-  )
+  );
 }

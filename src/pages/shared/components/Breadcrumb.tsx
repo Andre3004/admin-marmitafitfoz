@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,18 +6,20 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '../../../components/ui/breadcrumb'
+} from '../../../components/ui/breadcrumb';
 
 interface BreadcrumbItemType {
-  label: string
-  href?: string
+  label: string;
+  href?: string;
 }
 
 interface BreadcrumbComponentProps {
-  items: BreadcrumbItemType[]
+  items: BreadcrumbItemType[];
 }
 
-export default function BreadcrumbComponent({ items }: BreadcrumbComponentProps) {
+export default function BreadcrumbComponent({
+  items,
+}: BreadcrumbComponentProps) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -35,5 +37,5 @@ export default function BreadcrumbComponent({ items }: BreadcrumbComponentProps)
         ))}
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }

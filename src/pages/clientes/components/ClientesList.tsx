@@ -1,36 +1,39 @@
-import { useState } from 'react'
-import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi'
-import type { Cliente } from '../types/cliente'
-import { useClientes } from '../hooks/useClientes'
-import { applyPhoneMask } from '../utils/phoneMask'
-import { Button } from '../../../components/ui/button'
+import { useState } from 'react';
+import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi';
+import type { Cliente } from '../types/cliente';
+import { useClientes } from '../hooks/useClientes';
+import { applyPhoneMask } from '../utils/phoneMask';
+import { Button } from '../../../components/ui/button';
 
 interface ClientesListProps {
-  onEdit: (cliente: Cliente) => void
-  onCreateNew: () => void
+  onEdit: (cliente: Cliente) => void;
+  onCreateNew: () => void;
 }
 
-export default function ClientesList({ onEdit, onCreateNew }: ClientesListProps) {
-  const { clientes, formasPagamento, deleteCliente, isLoading } = useClientes()
-  const [deletingId, setDeletingId] = useState<string | null>(null)
+export default function ClientesList({
+  onEdit,
+  onCreateNew,
+}: ClientesListProps) {
+  const { clientes, formasPagamento, deleteCliente, isLoading } = useClientes();
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const handleDelete = async (documentId: string) => {
     if (window.confirm('Tem certeza que deseja deletar este cliente?')) {
-      setDeletingId(documentId)
+      setDeletingId(documentId);
       try {
-        await deleteCliente(documentId)
+        await deleteCliente(documentId);
       } catch (error) {
-        console.error('Erro ao deletar cliente:', error)
+        console.error('Erro ao deletar cliente:', error);
       } finally {
-        setDeletingId(null)
+        setDeletingId(null);
       }
     }
-  }
+  };
 
   const getFormaPagamentoNome = (formaPagamentoId: number) => {
-    const forma = formasPagamento.find(f => f.id === formaPagamentoId)
-    return forma?.nome || 'N/A'
-  }
+    const forma = formasPagamento.find(f => f.id === formaPagamentoId);
+    return forma?.nome || 'N/A';
+  };
 
   if (isLoading && clientes.length === 0) {
     return (
@@ -39,7 +42,7 @@ export default function ClientesList({ onEdit, onCreateNew }: ClientesListProps)
           <div className="text-gray-500">Carregando clientes...</div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -79,7 +82,7 @@ export default function ClientesList({ onEdit, onCreateNew }: ClientesListProps)
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {clientes.map((cliente) => (
+              {clientes.map(cliente => (
                 <tr key={cliente.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {cliente.nome}
@@ -107,7 +110,9 @@ export default function ClientesList({ onEdit, onCreateNew }: ClientesListProps)
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => cliente.documentId && handleDelete(cliente.documentId)}
+                        onClick={() =>
+                          cliente.documentId && handleDelete(cliente.documentId)
+                        }
                         disabled={deletingId === cliente.documentId}
                         title="Deletar cliente"
                         className="h-8 w-8 text-red-600 hover:text-red-900 hover:bg-red-50"
@@ -123,5 +128,5 @@ export default function ClientesList({ onEdit, onCreateNew }: ClientesListProps)
         </div>
       )}
     </div>
-  )
+  );
 }
