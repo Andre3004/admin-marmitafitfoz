@@ -8,6 +8,7 @@ import PedidosInserirPage from './pages/pedidos/inserir';
 import PedidosEditarPage from './pages/pedidos/editar';
 import CalendarioPage from './pages/calendario';
 import CalculadoraPage from './pages/calculadora';
+import Mercado from './pages/mercado';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
@@ -124,6 +125,29 @@ function Dashboard() {
             </div>
           </div>
         </Link>
+
+        <Link
+          to="/mercado"
+          className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow duration-200"
+        >
+          <div className="px-4 py-5 sm:p-6">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 bg-red-500 rounded-md flex items-center justify-center">
+                  <span className="text-white font-bold">M</span>
+                </div>
+              </div>
+              <div className="ml-5 w-0 flex-1">
+                <dl>
+                  <dt className="text-sm font-medium text-gray-500 truncate">
+                    Mercado
+                  </dt>
+                  <dd className="text-lg font-medium text-gray-900">Mercado</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </Link>
       </div>
     </Layout>
   );
@@ -193,6 +217,15 @@ function Router() {
         <Route
           path="/pedidos"
           element={<Navigate to="/pedidos/listar" replace />}
+        />
+
+        <Route
+          path="/mercado"
+          element={
+            <ProtectedRoute>
+              <Mercado />
+            </ProtectedRoute>
+          }
         />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
       </Routes>

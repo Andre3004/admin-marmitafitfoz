@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { useSidebarStore } from '../store/useSidebarStore';
 import { Button } from '../../../components/ui/button';
+import { FiAnchor, FiShoppingCart } from 'react-icons/fi';
 
 const menuItems = [
   {
@@ -85,6 +86,16 @@ const menuItems = [
         />
       </svg>
     ),
+  },
+  {
+    name: 'Mercado',
+    href: '/mercado',
+    icon: <FiShoppingCart className="h-5 w-5" />,
+  },
+  {
+    name: 'Calculadora',
+    href: '/calculadora',
+    icon: <FiAnchor className="h-5 w-5" />,
   },
 ];
 
